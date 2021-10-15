@@ -1,0 +1,262 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>{{title|title}}</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+<!-- Favicons -->
+<link rel="shortcut icon" href="{% static 'main/assets/img/favicon.ico' %}" type="image/x-icon">
+<link rel="icon" href="{% static 'main/assets/img/favicon.ico' %}" type="image/x-icon"> 
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'main/assets/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/ionicons/css/ionicons.min.css'%}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/owl.carousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'main/assets/css/style.css'%}" rel="stylesheet">
+
+  
+</head>
+
+<body>
+
+  <!-- ======= Property Search Section ======= -->
+  <div class="click-closed"></div>
+  <!--/ Form Search Star /-->
+  <div class="box-collapse">
+    <div class="title-box-d">
+      <h3 class="title-d">Search Property</h3>
+    </div>
+    <span class="close-box-collapse right-boxed ion-ios-close"></span>
+    <div class="box-collapse-wrap form">
+      <form class="form-a" method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-12 mb-2">
+            <div class="form-group">
+              <label for="Type">medicament name</label>
+              <input type="text" class="form-control form-control-lg form-control-a" name="name" placeholder="medicament x..">
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group">
+              <label for="Type">Type</label>
+              <select class="form-control form-control-lg form-control-a"  name="type" id="type">
+                <option value="requests">Requests</option>
+                <option value="donations">Donations</option>
+              
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group">
+              <label for="city">City</label>
+              <select class="form-control form-control-lg form-control-a"  name="city" id="city">
+                <option>All City</option>
+              </select>
+            </div>
+          </div>
+      
+      
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-b">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div><!-- End Property Search Section -->>
+
+  <!-- ======= Header/Navbar ======= -->
+  <nav style="height: 75px;" class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+    <div class="container">
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a class="navbar-brand text-brand" href="{% url 'user:profile' %}" > Medica<span class="color-b">Share</span></a>
+      <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
+        <span class="fa fa-search" aria-hidden="true"></span>
+      </button>
+      <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+        <ul class="navbar-nav">
+          <li class="nav-item" style="    margin-top: 14px;
+          ">
+            <a class="nav-link" href="{% url 'user:profile' %}"> Home</a>
+          </li>
+          
+          <li class="nav-item" style="margin-top: 14px;">
+            <a class="nav-link {{ active1 }}" href="{% url 'user:newRequest' %}">request</a>
+          </li>
+          <li class="nav-item" style="margin-top: 14px;">
+            <a class="nav-link {{ active2 }}" href="{% url 'user:newDonation' %}">Donate</a>
+          </li>
+
+
+          <li class="nav-item" style="    margin-top: 14px;          " >
+            {% if nb_nots > 0 %}
+              <a class="nav-link" href="{% url 'user:notification' %}"> Notifications
+                <div id="nots"> <span class="badge">{{nb_nots}}</span></div> </a>
+            
+              {% else %} <!-- no notification -->
+            <a class="nav-link" href="{% url 'user:notification' %}"></i><span>Notifications</span> </a>
+            {% endif %}
+            
+          </li>
+          <li class="nav-item dropdown ml-5" style="    margin-top: 5px;">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="avatar" src="{{user.profile.image.url}}" alt="">
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'user:privatePosts' %}">My posts</a>
+              <a class="dropdown-item" href="{% url 'user:historics' %}">Historics</a>
+              <a class="dropdown-item" href="{% url 'user:update_profile' user.username %}">Edit Profile</a>
+              <a class="dropdown-item" href="{% url 'user:logout' %}">Log out</a>
+              
+            </div>
+          </li>
+        </ul>
+      </div>
+      <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
+        <span class="fa fa-search" aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav><!-- End Header/Navbar -->
+
+  <main id="main">
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+      <div style="margin: -46px 0px 5px 57px;" class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+          {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}"> {{message}} </div>
+        {% endfor %}
+        {% endif %} 
+        </div>
+        
+      </div>
+    </section><!-- End Intro Single -->
+
+    <!-- ======= Agent Single ======= -->
+    <section class="agent-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              
+              <div style="margin-top:-170px;margin-left: 70px;" class="col-md-5 section-md-t3">
+                <div class="agent-info-box">
+                  <div class="agent-title">
+                    <div class="title-box-d">
+                      <h3 class="title-d">Add new {{post_type}}
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="agent-content mb-3" style="margin-top: -37px;">
+                    <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p>
+                         <p>* Object :</p>
+                        <input class="textinput textInput form-control" type="text" name="object"   value="{{post.title}}" required>
+                    </p>
+                    {% if page == "D" %}
+                    <p>
+                      <p>
+                      * Expiration date :
+                      </p>
+                      <input class="textinput form-control" type="date" name="expirattion_date" id="datefield" required>
+                    </p>
+                    {%endif%}
+                    <p>
+                        <p> * Write any thing :</p>
+                        <textarea class="textinput textInput form-control" name="content">{{ post.content}}</textarea>
+                    </p>
+                    <p>
+                         <p>* Your current address :</p>
+                        <input class="textinput textInput form-control" type="text" name="c_place" value="{{post.current_place}}"  required>
+                    </p>
+            
+                   
+                        <div class="file-field">
+                            <a class="btn-floating purple-gradient mt-0 float-left">
+                            <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+                          <p>* Medicament Image </p>
+                            <input style="margin-left: 10px;"  type="file" id="image" value="ok22" name="image" accept="image/*">
+                            </a>
+                   
+                        </div>
+                        <br>
+                        <input class="btn-update" style="width: 79px;
+                        padding: 3px;
+                        font-size: 19px;
+                        margin: 10px 0px 0px 1px;
+                        background-color: #73f573;
+                        border-radius: 2px;" type="submit" value=" OK ">
+                        
+
+       
+                    </form>
+                
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+           
+
+          </div>
+        </div>
+      </div>
+    </section><!-- End Agent Single -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'main/assets/vendor/jquery/jquery.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/jquery.easing/jquery.easing.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/php-email-form/validate.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/owl.carousel/owl.carousel.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/scrollreveal/scrollreveal.min.js'%}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'main/assets/js/main.js' %}"></script>
+
+  
+</body>
+  <script>
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){
+          dd='0'+dd 
+      } 
+    if(mm<10){
+        mm='0'+mm
+    }
+    today = yyyy+'-'+mm+'-'+dd;
+    document.getElementById("datefield").setAttribute("min", today);
+  </script>
+</html>

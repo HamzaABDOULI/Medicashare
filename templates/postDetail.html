@@ -1,0 +1,300 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>{{title|title}}</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+ 
+ <!-- Favicons -->
+ <link rel="shortcut icon" href="{% static 'main/assets/img/favicon.ico' %}" type="image/x-icon">
+ <link rel="icon" href="{% static 'main/assets/img/favicon.ico' %}" type="image/x-icon"> 
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'main/assets/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/ionicons/css/ionicons.min.css'%}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/owl.carousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'main/assets/css/style.css'%}" rel="stylesheet">
+
+  
+</head>
+
+<body>
+
+ <!-- ======= Property Search Section ======= -->
+ <div class="click-closed"></div>
+ <!--/ Form Search Star /-->
+ <div class="box-collapse">
+   <div class="title-box-d">
+     <h3 class="title-d">Search Property</h3>
+   </div>
+   <span class="close-box-collapse right-boxed ion-ios-close"></span>
+   <div class="box-collapse-wrap form">
+     <form class="form-a" method="POST">
+       {% csrf_token %}
+       <div class="row">
+         <div class="col-md-12 mb-2">
+           <div class="form-group">
+             <label for="Type">medicament name</label>
+             <input type="text" class="form-control form-control-lg form-control-a" name="name" placeholder="medicament x..">
+           </div>
+         </div>
+         <div class="col-md-6 mb-2">
+           <div class="form-group">
+             <label for="Type">Type</label>
+             <select class="form-control form-control-lg form-control-a"  name="type" id="type">
+               <option value="requests">Requests</option>
+               <option value="donations">Donations</option>
+             
+             </select>
+           </div>
+         </div>
+         <div class="col-md-6 mb-2">
+           <div class="form-group">
+             <label for="city">City</label>
+             <select class="form-control form-control-lg form-control-a"  name="city" id="city">
+               <option>All City</option>
+            >
+             </select>
+           </div>
+         </div>
+         <div class="col-md-12">
+           <button type="submit" class="btn btn-b">Search</button>
+         </div>
+       </div>
+     </form>
+   </div>
+ </div><!-- End Property Search Section -->>
+
+ <!-- ======= Header/Navbar ======= -->
+ <nav style="height: 75px;" class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+   <div class="container">
+     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+       <span></span>
+       <span></span>
+       <span></span>
+     </button>
+     <a class="navbar-brand text-brand" href="{% url 'user:profile' %}" > Medica<span class="color-b">Share</span></a>
+     <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
+       <span class="fa fa-search" aria-hidden="true"></span>
+     </button>
+     <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+       <ul class="navbar-nav">
+         <li class="nav-item" style="    margin-top: 14px;
+         ">
+           <a class="nav-link" href="{% url 'user:profile' %}"> Home</a>
+         </li>
+         <li class="nav-item" style="    margin-top: 14px;
+         ">
+           <a class="nav-link" href="{% url 'user:newRequest' %}">request</a>
+         </li>
+         <li class="nav-item" style="    margin-top: 14px;
+         ">
+           <a class="nav-link" href="{% url 'user:newDonation' %}">Donate</a>
+         </li>
+         <li class="nav-item" style="    margin-top: 14px;          " >
+           {% if nb_nots > 0 %}
+             <a class="nav-link" href="{% url 'user:notification' %}"> Notifications
+               <div id="nots"> <span class="badge">{{nb_nots}}</span></div> </a>
+
+             {% else %} <!-- no notification -->
+           <a class="nav-link" href="{% url 'user:notification' %}"></i><span>Notifications</span> </a>
+           {% endif %}
+           
+         </li>
+         <li class="nav-item dropdown ml-5" style="    margin-top: 5px;">
+           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <img class="avatar" src="{{user.profile.image.url}}" alt="">
+           </a>
+           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+             <a class="dropdown-item" href="{% url 'user:privatePosts' %}">My posts</a>
+             <a class="dropdown-item" href="{% url 'user:historics' %}">Historics</a>
+             <a class="dropdown-item" href="{% url 'user:update_profile' user.username %}">Edit Profile</a>
+             <a class="dropdown-item" href="{% url 'user:logout' %}">Log out</a>
+             
+           </div>
+         </li>
+       </ul>
+     </div>
+     <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
+       <span class="fa fa-search" aria-hidden="true"></span>
+     </button>
+   </div>
+ </nav><!-- End Header/Navbar -->
+
+
+  <main id="main">
+
+    <!-- ======= Intro Single ======= -->
+    <section style="margin-top: -92px;" class="intro-single">
+      <div class="container">
+        <div class="row">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{message.tags}}"> {{message}} </div>
+          {% endfor %}
+          {% endif %} 
+
+          <div class="col-md-12 col-lg-8">
+            <div class="title-single-box" style="height: 61px;">
+              <h1 class="title-single" style="font-size: 24px;margin: -16px 0px 0px -6px;">
+                <img style="margin: 5px 9px 8px 0px;" class="avatar" 
+               src="{{post.author.profile.image.url }}" alt="">{{post.author.first_name|title }} <span class="ml-2">{{post.author.last_name }}  </span></h1>
+              
+          </div>
+          
+        </div>
+        
+      </div>
+    </section><!-- End Intro Single -->
+
+    <!-- ======= Agent Single ======= -->
+    <section class="agent-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="agent-avatar-box postDetail">
+                  <img style="    margin: -33px 0px -4px 1px;
+                  width: 367px;
+                  height: 232px;
+                  border-radius: 20px;" src="{{post.image.url }}" alt="" class="agent-avatar img-fluid">
+                <div class="crudbtn">
+                    {% if post.author == user %}
+                        <div style="margin: 28px 0 0px 8px;">
+                          <a class="delbtn" href="{% url 'user:delete_post' post.id %}">  delete </a>
+                        <a class="upbtn" href="{% url 'user:update_post' post.id %}">  update </a>
+                        </div>
+                    {% else %}
+                    <form method="POST">
+                    {% csrf_token %}
+                        {% if post.post_type == 'R' %}
+                        <input  class="choose" type="submit" value="Help {{post.author}} "> <br>
+                        <small style="margin-left: -78px;"> By clicking <b>HELP</b> you accept to send your email <br> <span style="margin-left: -78px;">and phone number to <b>{{post.author.first_name}} </b></span></small>
+                        
+                        {% elif post.post_type == 'D' %}
+                        <input  class="choose" type="submit" value="Ask for this"> <br>
+                        <small style="margin-left: -78px"> By clicking <b>ASK</b> you accept to send your email <br> <span style="margin-left: -78px;">and phone number to <b>{{post.author.first_name}} </b></span></small>
+                    
+                        {% endif %}
+                    </form>
+             {% endif %}
+                </div>
+                </div>
+              </div>
+              <div style="margin: -92px 0px 0px -80px;" class="col-md-5 section-md-t3">
+                <div class="agent-info-box">
+                  <div class="agent-title">
+                    <div class="title-box-d">
+                      <h3 style="font-size: 20px;" class="title-d"> Object : <span style="    font-weight: 300;
+                        margin-left: 3px;
+                        font-size: 19px;">{{post.title }}</span> 
+                        {%if post.post_type == 'D' %}
+                        <small style="    margin-left: 12px;
+                        color: #21a54a;">ED : {{post.expirattion_date|date:'d-m-Y'}} </small>
+                        {%endif%}
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="agent-content mb-3">
+                    <p class="content-d color-text-a">
+                      {{post.content}}
+                    </p>
+                    <p>
+                      <strong> Current city :</strong> {{ post.current_place }} <br>
+                    </p>
+                    <div class="info-agents color-a">
+                      {% if post.author.profile.phone_number %}
+                      <p>
+                        <strong>Phone: </strong>
+                        <span class="color-text-a"> {{post.author.profile.phone_number}} </span>
+                      </p>
+                      {%endif%}
+                     
+                      <p>
+                        <strong>Email: </strong>
+                        <span class="color-text-a"> {{post.author.email}} </span>
+                      </p>
+                      <p>
+                        <strong> Published on</strong> : {{ post.post_date|date:'D M Y - G:i:s'}} <br>
+                        {% if post.author == user %}
+                        <div style="    padding: 2px 2px 0 13px;
+                        background-color: #9bb5e4;
+                        font-size: 22px;
+                        margin: 28px 0 0px 8px;">                        
+                        {%if post.post_type == 'R' %}
+                        If you received a donation about this post :  <a href="{% url 'user:saveToHistorics' post.id %}"> <br> <span style="color: #21a54a;font-size: larger;"> please click here !</span> </a>
+                        
+                        {%else%}
+                        If you gave this donation about :  <a href="{% url 'user:saveToHistorics' post.id %}"> <br> <span style="color: #21a54a;font-size: larger;"> please click here !</span> </a>
+                        {%endif%} 
+                        </div>
+                    {% endif %}
+                      </p>
+                     
+                     
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+         
+           
+
+          </div>
+        </div>
+      </div>
+    </section><!-- End Agent Single -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer style="margin-top: 27px;
+  height: 72px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-footer">
+            <p class="copyright color-text-a" style="margin-top: -10px;">
+              &copy; Copyright
+              <span class="color-a">MedicaShare</span> All Rights Reserved.
+            </p>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'main/assets/vendor/jquery/jquery.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/jquery.easing/jquery.easing.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/php-email-form/validate.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/owl.carousel/owl.carousel.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/scrollreveal/scrollreveal.min.js'%}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'main/assets/js/main.js' %}"></script>
+
+  
+</body>
+
+</html>

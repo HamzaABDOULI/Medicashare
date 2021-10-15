@@ -1,0 +1,321 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>{{title|title}}</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+<!-- Favicons -->
+<link rel="shortcut icon" href="{% static 'main/assets/img/favicon.ico' %}" type="image/x-icon">
+<link rel="icon" href="{% static 'main/assets/img/favicon.ico' %}" type="image/x-icon"> 
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'main/assets/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/ionicons/css/ionicons.min.css'%}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/owl.carousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'main/assets/css/style.css'%}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: EstateAgency - v2.0.0
+  * Template URL: https://bootstrapmade.com/real-estate-agency-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+<style>
+    
+</style>
+</head>
+
+<body>
+  <div class="click-closed"></div>
+  <!--/ Form Search Star /-->
+  <div class="box-collapse">
+    <div class="title-box-d">
+      <h3 class="title-d">Search Property</h3>
+    </div>
+    <span class="close-box-collapse right-boxed ion-ios-close"></span>
+    <div class="box-collapse-wrap form">
+      <form class="form-a" method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-12 mb-2">
+            <div class="form-group">
+              <label for="Type">medicament name</label>
+              <input type="text" class="form-control form-control-lg form-control-a" name="name" placeholder="medicament x..">
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group">
+              <label for="Type">Type</label>
+              <select class="form-control form-control-lg form-control-a"  name="type" id="type">
+                <option value="requests">Requests</option>
+                <option value="donations">Donations</option>
+              
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group">
+              <label for="city">City</label>
+              <select class="form-control form-control-lg form-control-a"  name="city" id="city">
+                <option value="All cities">All cities</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Beja">Beja</option>
+                <option value="Ben Arous">Ben Arous</option>
+                <option value="Bizerte">Bizerte</option>
+                <option value="Gabes">Gabes</option>
+                <option value="Gafsa">Gafsa</option>
+                <option value="Jendouba">Jendouba</option>
+                <option value="Kairouan">Kairouan</option>
+                <option value="Kasserine">Kasserine</option>
+                <option value="Kebeili">Kebeili</option>
+                <option value="Le kef">Le Kef</option>
+                <option value="Mahdiya">Mahdiya</option>
+                <option value="La Manouba">La Manouba</option>
+                <option value="Mednine">Mednine</option>
+                <option value="Monastir">Monastir</option>
+                <option value="Nabeul">Nabeul</option>
+                <option value="Sfax">Sfax</option>
+                <option value="Sidi Bouzid">Sidi Bouzid</option>
+                <option value="Siliana">Siliana</option>
+                <option value="Sousse">Sousse</option>
+                <option value="Tataouine">Tataouine</option>
+                <option value="Tozeur">Tozeur</option>
+                <option value="Tunis">Tunis</option>
+                <option value="Zaghouan">Zaghouan</option>
+              </select>
+            </div>
+          </div>
+      
+      
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-b">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div><!-- End Property Search Section -->>
+
+  <!-- ======= Header/Navbar ======= -->
+  <nav style="height: 76px;"  class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+    <div class="container">
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a class="navbar-brand text-brand" href="{% url 'user:profile' %}" > Medica<span class="color-b">Share</span></a>
+      <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
+        <span class="fa fa-search" aria-hidden="true"></span>
+      </button>
+      <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'user:profile' %}"> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">request</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'user:newDonation' %}">Donate</a>
+          </li>
+          <li class="nav-item">
+            {% if nb_nots > 0 %}
+              <a class="nav-link" href="{% url 'user:notification' %}"> Notifications
+                <div id="nots"> <span class="badge">{{nb_nots}}</span></div> </a>
+            
+              {% else %} <!-- no notification -->
+            <a class="nav-link" href="{% url 'user:notification' %}"></i><span>Notifications</span> </a>
+            {% endif %}
+            
+          </li>
+          <li class="nav-item dropdown ml-5">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{user.username}} 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'user:privatePosts' %}">My posts</a>
+              <a class="dropdown-item" href="{% url 'user:update_profile' user.username %}">Edit Profile</a>
+              <a class="dropdown-item" href="{% url 'user:logout' %}">Log out</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
+        <span class="fa fa-search" aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav><!-- End Header/Navbar -->
+
+  <main id="main">
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <div class="title-single-box">
+              <h1 class="title-single">{{ postType }} </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Intro Single-->
+
+    <!-- =======  Blog Grid ======= -->
+    <section class="news-grid grid">
+      <div class="container">
+        <div class="row">
+          {% for post in posts %}
+             <!-- Post begin-->
+          <div class="col-md-4">
+            <div class="card-box-b card-shadow news-box">
+              <div class="img-box-b">
+                <img  src="{{ post.image.url }}" alt="" class="img-b img_fluid">
+              </div>
+              <div class="card-overlay">
+                <div class="card-header-b">
+                  <div class="card-category-b detail">
+                    <a href="{% url 'user:detail' post.slug_title  post.id %}" class="category-b">more details</a>
+                  </div>
+                  <div class="card-title-b">
+                    <h2 class="title-2">
+                      <a href="{% url 'user:detail' post.slug_title  post.id %}">{{ post.title|truncatechars:18 }}
+                      </a>
+                    </h2>
+                  </div>
+                  <div class="card-date">
+                    <div class="avatarPos">
+                      <img src="{{ post.author.profile.image.url }}" class="avatar" alt="">
+                      <span style="margin-left: 170px;" class="date-b"> {{ post.post_date|date:'d M y'}}</span>
+                      <br>
+                      <span style="margin-left: 0px;"> {{post.author.username}} </span>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<!-- Post end -->
+            {%empty%}
+              <p> You don't have any posts yet </p>
+            {% endfor %}
+
+         
+        </div>
+        <!-- pagination -->
+
+        
+<div class="row">
+  <div class="col-sm-12">
+    <nav class="pagination-a">
+      <ul class="pagination justify-content-end">
+        {% if donations.has_previous %}
+          <li class="page-item">
+          <a class="page-link" href="?page1={{ donations.previous_page_number }}">
+            <span class="ion-ios-arrow-back"></span>
+          </a>
+        </li>
+          {% else %}
+            <li class="page-item disabled">
+          <a class="page-link" href="#">
+            <span class="ion-ios-arrow-back"></span>
+          </a>
+        </li>
+         {% endif %}
+
+           {% for i in donations.paginator.page_range %}
+            {% if donations.number == i %}
+            <li class="page-item active">
+              <a class="page-link" href="?page1={{ i }}">{{ i }} </a>
+            </li>
+            {% else %}
+              <li class="page-item">
+              <a class="page-link" href="?page1={{ i }}">{{ i }} </a>
+            </li>
+            {% endif %}
+          {% endfor %}
+
+          {% if donations.has_next %}
+           <li class="page-item next">
+          <a class="page-link" href="?page1={{ donations.next_page_number }}">
+            <span class="ion-ios-arrow-forward"></span>
+          </a>
+        </li>
+          {% else %}
+               <li class="page-item disabled">
+          <a class="page-link" href="#">
+            <span class="ion-ios-arrow-forward"></span>
+          </a>
+        </li>
+          {% endif %}
+       
+
+        
+       
+       
+      </ul>
+    </nav>
+  </div>
+</div>
+
+      </div>
+    </section><!-- End Blog Grid-->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-footer">
+            <p class="copyright color-text-a">
+              &copy; Copyright
+              <span class="color-a">MedicaShare</span> All Rights Reserved.
+            </p>
+          </div>
+          <div class="credits">
+            <!--
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=EstateAgency
+          -->
+            Designed by <a href="https://bootstrapmade.com/">Me :p </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'main/assets/vendor/jquery/jquery.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/jquery.easing/jquery.easing.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/php-email-form/validate.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/owl.carousel/owl.carousel.min.js'%}"></script>
+  <script src="{% static 'main/assets/vendor/scrollreveal/scrollreveal.min.js'%}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'main/assets/js/main.js' %}"></script>
+
+  
+</body>
+
+</html>
