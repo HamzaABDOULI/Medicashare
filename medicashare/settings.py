@@ -27,10 +27,9 @@ DEBUG = True
 EMAIL_HOST ='smtp.gmail.com'
 EMAIL_PORT =587
 EMAIL_HOST_USER  ='medica.share.staff@gmail.com'
-EMAIL_HOST_PASSWORD ='92686410'
+EMAIL_HOST_PASSWORD ='50695288'
 EMAIL_USE_TLS =True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -84,11 +83,14 @@ WSGI_APPLICATION = 'medicashare.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'pgdb',
+        'PORT': 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -120,7 +122,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
