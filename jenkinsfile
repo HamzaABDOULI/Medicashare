@@ -1,41 +1,30 @@
-node {
-    stage('Preparation') {
-        deleteDir()
-        checkout scm
-        sh 'git submodule update --init --recursive'
-        env.GIT_URL = sh(returnStdout: true, script: 'git config --get remote.origin.url').trim()
-        env.GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-        env.GIT_COMMIT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-        def workspace = pwd()
-        sh "cp /var/jenkins_home/deploy-app-vars.yml ${workspace}/ci/ansible/"
-        sh "cp /var/jenkins_home/ansible-hosts ${workspace}/ci/ansible/hosts"
-        sh '''if [ ! -d "venv" ]; then
-            virtualenv venv
-        fi'''
-        sh ". venv/bin/activate"
-        sh "pip install django"
-        sh "pip install -r requirements.txt"
-        sh "python manage.py makemigrations"
-        sh "python manage.py migrate"
+pipeline{
+    agent any 
+    environment{
+        VERSION = "${env.BUILD_ID}"
     }
+    stages{
+        stage("sonar quality check"){
+            agent {
+                docker {
+                    image 'openjdk:11'
+                }
+            }
+            steps{
+                script{
+                    withSonarQubeEnv(credentialsId: 'sonar-token') {
+                            sh "SonarQubeScanner/bin/sonar-scanner"
+                    }
 
-    stage('Test') {
-        sh "python manage.py test"
-    }
+                    timeout(time: 1, unit: 'HOURS') {
+                      def qg = waitForQualityGate()
+                      if (qg.status != 'OK') {
+                           error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                      }
+                    }
 
-    stage('SonarQube analysis') {
-        // The SonarQube server requires at least 2GB of RAM to run efficiently and 1GB of free RAM for the OS.
-        def scannerHome = tool 'SonarQubeScanner';
-        withSonarQubeEnv('SonarQube') {
-            sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
-        }
-    }
-
-    stage("SonarQube Quality Gate") {
-        timeout(time: 1, unit: 'HOURS') {
-            def qg = waitForQualityGate()
-            if (qg.status != 'OK') {
-                error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                }  
             }
         }
-    }
+       
+}
