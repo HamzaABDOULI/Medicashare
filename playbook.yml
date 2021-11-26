@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+  - name: Run container
+    become: True
+    shell:
+      cmd: "docker-compose up"
+      chdir: /home/hamza/Desktop/medicashare_vf/
