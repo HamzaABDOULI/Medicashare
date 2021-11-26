@@ -1,7 +1,7 @@
 apiVersion: apps/v1 
 kind: Deployment 
 metadata: 
-  name: django-deployment 
+  name: django
 spec: 
   selector: 
     matchLabels: 
@@ -21,15 +21,15 @@ spec:
 ---
 
 kind: Service 
-apiVersion: v1 
+apiVersion: apps/v1 
 metadata: 
   name: django-service 
 spec: 
   selector: 
     app: django 
   ports: 
-  - protocol: TCP 
+   - protocol: TCP 
     port: 80 
     targetPort: 80 
     nodePort: 31000 
-  type: NodePort 
+  type: NodePort

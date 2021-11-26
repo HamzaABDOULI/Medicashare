@@ -6,3 +6,6 @@
     shell:
       cmd: "docker-compose up"
       chdir: /home/hamza/Desktop/medicashare_vf/
+
+  - name: Run container
+    command: kubectl apply -f deployment_local.yaml
