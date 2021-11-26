@@ -7,5 +7,8 @@
       cmd: "docker-compose up"
       chdir: /home/hamza/Desktop/medicashare_vf/
 
-  - name: Run container
-    command: kubectl apply -f deployment_local.yaml
+  - name: Deploy django&service to kubernetes
+    command: kubectl apply -f deployment_django.yaml
+
+  - name: Deploy postgres&service to kubernetes
+    command: kubectl apply -f deployment_postgres.yml
