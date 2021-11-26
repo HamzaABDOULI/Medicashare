@@ -1,11 +1,20 @@
 ---
 - hosts: all
   tasks:
-  - name: Run container
+  - name: Build Containers
+    become: True
+    shell:
+      cmd: "docker-compose build"
+      chdir: /home/hamza/Desktop/medicashare_vf/
+
+  - name: Run Containers
     become: True
     shell:
       cmd: "docker-compose up"
-      chdir: /home/hamza/Desktop/medicashare_vf/
+      chdir: /home/hamza/Desktop/medicashare_vf/  
+
+  - name: Deploy django&service to kubernetes
+    command: kubectl apply -f deployment_django.yaml    
 
   - name: Deploy django&service to kubernetes
     command: kubectl apply -f deployment_django.yaml
