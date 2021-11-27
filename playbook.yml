@@ -12,4 +12,9 @@
   - name: Run Containers
     become: True
     shell:
-      cmd: pwd
+      cmd: echo rombatakaya
+
+  - name: Echo
+    become: True
+    shell:
+      cmd: pwd   
