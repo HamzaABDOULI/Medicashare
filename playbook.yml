@@ -12,7 +12,7 @@
   - name: Run Containers
     become: True
     shell:
-      chdir: ./medicashare
+      chdir: ./medicashare_vf
       cmd: docker-compose up
  
    
