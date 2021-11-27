@@ -1,14 +1,11 @@
 ---
 - hosts: all
   tasks:
-  - name: Build Containers
-    become: True
-    shell:
-      cmd: "docker-compose build"
-      chdir: /home/hamza/Desktop/medicashare_vf/
+  - name: Stop Django Container if running
+    command: docker stop django 
+    ignore_errors : True
 
-  - name: Run Containers
-    become: True
-    shell:
-      cmd: "docker-compose up &"
-      chdir: /home/hamza/Desktop/medicashare_vf/
+  - name: Stop Postgres Container if running
+    command: docker stop pgdb 
+    ignore_errors : True  
+
