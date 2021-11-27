@@ -12,5 +12,5 @@
   - name: Run Containers
     become: True
     shell:
-      chdir: ./
+      chdir: medicashare_vf_django
       cmd: docker-compose up
