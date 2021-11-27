@@ -12,5 +12,4 @@
   - name: Run Containers
     become: True
     shell:
-      chdir: medicashare_vf/
       cmd: pwd
