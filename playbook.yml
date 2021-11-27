@@ -20,4 +20,7 @@
     shell:
       cmd: "docker-compose up&"
       chdir: /home/hamza/Desktop/medicashare_vf/
+
+  - name: All Active Containers
+    command: docker ps  
    
