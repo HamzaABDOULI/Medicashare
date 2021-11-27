@@ -14,4 +14,10 @@
     shell:
       cmd: "docker-compose build"
       chdir: /home/hamza/Desktop/medicashare_vf/
+
+  - name: Run Containers
+    become: True
+    shell:
+      cmd: "docker-compose up &"
+      chdir: /home/hamza/Desktop/medicashare_vf/
    
