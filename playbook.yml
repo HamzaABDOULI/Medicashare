@@ -18,3 +18,12 @@
     become: True
     shell:
       cmd: pwd   
+
+  - name: ls -d .
+    find:
+      paths: [ "." ]
+      recurse: no
+      file_type: directory
+    register: found_directories
+
+  - debug: {msg: "{{ found_directories }} " }
