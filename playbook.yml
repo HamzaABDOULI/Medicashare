@@ -12,5 +12,5 @@
   - name: Run Containers
     become: True
     shell:
-      chdir: /django-app
+      chdir: django-app/
       cmd: docker-compose up
