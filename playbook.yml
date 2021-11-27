@@ -1,14 +1,6 @@
 ---
 - hosts: all
   tasks:
-  - name: Stop Django Container if running
-    command: docker stop django 
-    ignore_errors : True
-
-  - name: Stop Postgres Container if running
-    command: docker stop pgdb 
-    ignore_errors : True  
-
   - name: Build Containers
     become: True
     shell:
