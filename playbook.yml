@@ -6,21 +6,13 @@
     ignore_errors : True
 
   - name: Stop Postgres Container if running
-    command: docker stop pgdb 
+    command: docker stop pgdb
     ignore_errors : True  
-
-  - name: Build Containers
-    become: True
-    shell:
-      cmd: "docker-compose build"
-      chdir: /home/hamza/Desktop/medicashare_vf/
 
   - name: Run Containers
     become: True
     shell:
-      cmd: "docker-compose up&"
       chdir: /home/hamza/Desktop/medicashare_vf/
-
-  - name: All Active Containers
-    command: docker ps  
+      cmd: docker-compose up &
+ 
    
