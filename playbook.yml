@@ -13,5 +13,5 @@
     become: True
     shell:
       cmd: "docker-compose build"
-      chdir: ./
+      chdir: /home/hamza/Desktop/medicashare_vf/
    
