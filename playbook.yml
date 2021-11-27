@@ -9,3 +9,8 @@
     command: docker stop pgdb 
     ignore_errors : True  
 
+  - name: Build Containers
+    command: docker-compose build 
+
+  - name: Run Containers
+    command: docker-compose up    
