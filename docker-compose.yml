@@ -2,7 +2,7 @@ version: "3.8"
    
 services:
     django:
-        image: hamzaabdouli/medicashare_vf_django:v1
+        image: medicashare_vf_django
         #build: .
         container_name: django
         command: python manage.py runserver 0.0.0.0:8000
@@ -13,7 +13,7 @@ services:
         depends_on:
             - pgdb
     pgdb:
-        image: hamzaabdouli/postgres:v1
+        image: postgres
         container_name: pgdb
         environment:
         - POSTGRES_DB=postgres
