@@ -7,23 +7,17 @@
 
   - name: Stop Postgres Container if running
     command: docker stop pgdb
-    ignore_errors : True  
+    ignore_errors : True 
+
+
+  - name: Build Containers
+    become: True
+    shell:
+      cmd: "docker-compose build"
+      chdir: /home/hamza/.jenkins/workspace/Test/
 
   - name: Run Containers
     become: True
     shell:
-      cmd: echo rombatakaya
-
-  - name: Echo
-    become: True
-    shell:
-      cmd: pwd   
-
-  - name: ls -d .
-    find:
-      paths: [ "." ]
-      recurse: no
-      file_type: directory
-    register: found_directories
-
-  - debug: {msg: "{{ found_directories }} " }
+      cmd: "docker-compose up &"
+      chdir: /home/hamza/.jenkins/workspace/Test/
