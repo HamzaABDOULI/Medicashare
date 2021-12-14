@@ -2,26 +2,26 @@
 - hosts: all
   tasks:
   - name: Kubernetes Create Postgres PersistentVolume
-    become: True
+    become: False
     shell:
       cmd: "kubectl apply -f volume.yml"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/
       
 
   - name: Kubernetes Create Postgres PersistentVolumeClaim
-    become: True
+    become: False
     shell:
       cmd: "kubectl apply -f volume_claim.yml"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/
 
   - name: Kubernetes Create Postgres Service
-    become: True
+    become: False
     shell:
       cmd: "kubectl apply -f service.yml"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/
 
   - name: Kubernetes Create Postgres Deployment
-    become: True
+    become: False
     shell:
       cmd: "kubectl apply -f deployment.yml"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/     
