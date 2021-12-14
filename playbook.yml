@@ -5,8 +5,8 @@
     become: False
     shell:
       cmd: "kubectl apply -f volume.yml"
-      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/
-      
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/ 
+
   - name: Kubernetes Create Postgres PersistentVolumeClaim
     become: False
     shell:
@@ -35,7 +35,11 @@
     become: False
     shell:
       cmd: "kubectl apply -f django/"
-      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/  
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/ 
+
+  - name: Kubernetes Create namespace
+    command : kubectl create namespace monitoring
+    ignore_errors : True   
 
   - name: Kubernetes Create Prometheus yml files 
     become: False
