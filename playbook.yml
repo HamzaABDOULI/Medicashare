@@ -5,22 +5,22 @@
     become: True
     shell:
       cmd: "kubectl apply -f volume.yml"
-      chdir: /home/hamza/.jenkins/workspace/ProjetSem/deploy/kubernetes/postgres/
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project/kubernetes/postgres/
 
   - name: Kubernetes Create Postgres PersistentVolumeClaim
     become: True
     shell:
       cmd: "kubectl apply -f volume_claim.yml"
-      chdir: /home/hamza/.jenkins/workspace/ProjetSem/deploy/kubernetes/postgres/
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project/kubernetes/postgres/
 
   - name: Kubernetes Create Postgres Service
     become: True
     shell:
       cmd: "kubectl apply -f service.yml"
-      chdir: /home/hamza/.jenkins/workspace/ProjetSem/deploy/kubernetes/postgres/
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project/kubernetes/postgres/
 
   - name: Kubernetes Create Postgres Deployment
     become: True
     shell:
       cmd: "kubectl apply -f deployment.yml"
-      chdir: /home/hamza/.jenkins/workspace/ProjetSem/deploy/kubernetes/postgres/      
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project/kubernetes/postgres/     
