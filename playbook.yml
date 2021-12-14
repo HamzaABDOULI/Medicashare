@@ -39,7 +39,8 @@
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/ 
 
   - name: Kubernetes Create namespace
-    command : kubectl create ns monitoring    
+    command : kubectl create ns monitoring
+    ignore_errors : True   
 
   - name: Kubernetes Create Prometheus yml files 
     become: False
