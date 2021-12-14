@@ -14,6 +14,12 @@
       cmd: "kubectl apply -f volume_claim.yml"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/
 
+  - name: Kubernetes Create Postgres Secret
+    become: False
+    shell:
+      cmd: "kubectl apply -f secret.yml"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/
+
   - name: Kubernetes Create Postgres Service
     become: False
     shell:
