@@ -32,11 +32,23 @@
       cmd: "kubectl apply -f deployment.yml"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/   
 
-  - name: Kubernetes Create Django Deploymentss
+  - name: Kubernetes Create Django yml files 
     become: False
     shell:
       cmd: "kubectl apply -f django/"
-      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/   
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/ 
+
+  - name: Kubernetes Create Prometheus yml files 
+    become: False
+    shell:
+      cmd: "kubectl apply -f prometheus/"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/    
+
+  - name: Kubernetes Create Grafana yml files 
+    become: False
+    shell:
+      cmd: "kubectl apply -f grafana/"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/        
 
 
 
