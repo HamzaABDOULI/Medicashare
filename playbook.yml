@@ -1,23 +1,26 @@
 ---
 - hosts: all
   tasks:
-  - name: Stop Django Container if running
-    command: docker stop django 
-    ignore_errors : True
-
-  - name: Stop Postgres Container if running
-    command: docker stop pgdb
-    ignore_errors : True 
-
-
-  - name: Build Containers
+  - name: Kubernetes Create Postgres PersistentVolume
     become: True
     shell:
-      cmd: "docker-compose build"
-      chdir: /home/hamza/.jenkins/workspace/Test/
+      cmd: "kubectl apply -f volume.yml"
+      chdir: /home/hamza/.jenkins/workspace/ProjetSem/deploy/kubernetes/postgres/
 
-  - name: Run Containers
+  - name: Kubernetes Create Postgres PersistentVolumeClaim
     become: True
     shell:
-      cmd: "docker-compose up"
-      chdir: /home/hamza/.jenkins/workspace/Test/
+      cmd: "kubectl apply -f volume_claim.yml"
+      chdir: /home/hamza/.jenkins/workspace/ProjetSem/deploy/kubernetes/postgres/
+
+  - name: Kubernetes Create Postgres Service
+    become: True
+    shell:
+      cmd: "kubectl apply -f service.yml"
+      chdir: /home/hamza/.jenkins/workspace/ProjetSem/deploy/kubernetes/postgres/
+
+  - name: Kubernetes Create Postgres Deployment
+    become: True
+    shell:
+      cmd: "kubectl apply -f deployment.yml"
+      chdir: /home/hamza/.jenkins/workspace/ProjetSem/deploy/kubernetes/postgres/      
