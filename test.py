@@ -1,7 +1,7 @@
 from datetime import time
 from django.test import LiveServerTestCase
-from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import time
 
 
@@ -24,7 +24,7 @@ import time
 class LoginFormTest(LiveServerTestCase):
 
     def testform(self):
-        driver = webdriver.Chrome()
+        driver = webdriver.Chrome('/home/hamza/Desktop/chromedriver')
 
         driver.get('http://127.0.0.1:8000/login/')
 
