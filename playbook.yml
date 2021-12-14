@@ -17,7 +17,7 @@
   - name: Kubernetes Create Postgres Secret
     become: False
     shell:
-      cmd: "kubectl apply -f secret.yml"
+      cmd: "kubectl apply -f secrets.yml"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/
 
   - name: Kubernetes Create Postgres Service
@@ -30,4 +30,12 @@
     become: False
     shell:
       cmd: "kubectl apply -f deployment.yml"
-      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/     
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/   
+
+  - name: Kubernetes Create Postgres Deployment
+    become: False
+    shell:
+      cmd: "kubectl apply -f django/"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/   
+
+
