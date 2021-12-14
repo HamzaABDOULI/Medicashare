@@ -38,7 +38,6 @@
       cmd: "kubectl apply -f django/"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/   
 
-  - name: Run Django Service
-    command : minikube service django-service 
+
 
 
