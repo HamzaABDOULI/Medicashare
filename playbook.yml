@@ -32,7 +32,7 @@
       cmd: "kubectl apply -f deployment.yml"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/   
 
-  - name: Kubernetes Create Postgres Deployment
+  - name: Kubernetes Create Django Deploymentss
     become: False
     shell:
       cmd: "kubectl apply -f django/"
