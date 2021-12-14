@@ -7,7 +7,6 @@
       cmd: "kubectl apply -f volume.yml"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/
       
-
   - name: Kubernetes Create Postgres PersistentVolumeClaim
     become: False
     shell:
