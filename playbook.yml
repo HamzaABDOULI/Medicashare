@@ -38,6 +38,9 @@
       cmd: "kubectl apply -f django/"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/ 
 
+  - name: Kubernetes Create namespace
+    command : kubectl create ns monitoring    
+
   - name: Kubernetes Create Prometheus yml files 
     become: False
     shell:
