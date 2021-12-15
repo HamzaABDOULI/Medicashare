@@ -31,28 +31,69 @@
       cmd: "kubectl apply -f deployment.yml"
       chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/postgres/   
 
-  - name: Kubernetes Create Django yml files 
+  - name: Kubernetes Create Django Service
     become: False
     shell:
-      cmd: "kubectl apply -f django/"
-      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/ 
+      cmd: "kubectl apply -f service.yml"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/django/ 
+
+  - name: Kubernetes Create Django Deployment
+    become: False
+    shell:
+      cmd: "kubectl apply -f deployment.yml"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/django/
+
+  - name: Kubernetes Create Django Job-migration
+    become: False
+    shell:
+      cmd: "kubectl apply -f job-migration.yml"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/django/         
+
+  - name: Kubernetes Create Prometheus ClusterRole
+    become: False
+    shell:
+      cmd: "kubectl apply -f clusterRole.yml"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/prometheus/
 
   - name: Kubernetes Create namespace
     command : kubectl create namespace monitoring
     ignore_errors : True   
 
-  - name: Kubernetes Create Prometheus yml files 
+  - name: Kubernetes Create Prometheus Config-map
     become: False
     shell:
-      cmd: "kubectl apply -f prometheus/"
-      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/    
+      cmd: "kubectl apply -f config-map.yml"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/prometheus/
 
-  - name: Kubernetes Create Grafana yml files 
+  - name: Kubernetes Create Prometheus Service
     become: False
     shell:
-      cmd: "kubectl apply -f grafana/"
-      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/        
+      cmd: "kubectl apply -f prometheus-service.yml"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/prometheus/
 
+  - name: Kubernetes Create Prometheus Deployment
+    become: False
+    shell:
+      cmd: "kubectl apply -f prometheus-deployment.yml"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/prometheus/                   
+
+  - name: Kubernetes Create Grafana datasource-config
+    become: False
+    shell:
+      cmd: "kubectl apply -f grafana-datasource-config.yml"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/grafana/
+
+  - name: Kubernetes Create Grafana Service
+    become: False
+    shell:
+      cmd: "kubectl apply -f service.yml"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/grafana/
+
+  - name: Kubernetes Create Grafana Deployment
+    become: False
+    shell:
+      cmd: "kubectl apply -f deployment.yml"
+      chdir: /home/hamza/.jenkins/workspace/DevOps_Project2/deploy/kubernetes/grafana/ 
 
 
 
